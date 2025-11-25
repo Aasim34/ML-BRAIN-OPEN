@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Classification</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <h1>Brain Tumor Classification</h1>
+                </div>
+                <div class="model-status" id="modelStatus">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">Checking model...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <div class="container">
+            <!-- Info Section -->
+            <section class="info-section">
+                <div class="info-card">
+                    <h2><i class="fas fa-info-circle"></i> About</h2>
+                    <p>Upload an MRI scan image to classify brain tumors into four categories:</p>
+                    <div class="class-grid">
+                        <div class="class-item">
+                            <i class="fas fa-virus"></i>
+                            <strong>Glioma</strong>
+                            <span>Malignant brain tumor</span>
+                        </div>
+                        <div class="class-item">
+                            <i class="fas fa-shield-virus"></i>
+                            <strong>Meningioma</strong>
+                            <span>Membrane tumor</span>
+                        </div>
+                        <div class="class-item">
+                            <i class="fas fa-capsules"></i>
+                            <strong>Pituitary</strong>
+                            <span>Pituitary gland tumor</span>
+                        </div>
+                        <div class="class-item healthy">
+                            <i class="fas fa-check-circle"></i>
+                            <strong>No Tumor</strong>
+                            <span>Healthy brain scan</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="upload-card">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3>Upload MRI Scan</h3>
+                        <p>Drag & drop an image or click to browse</p>
+                        <p class="file-types">Supported: JPG, PNG, JPEG, BMP, TIF</p>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <button class="btn btn-primary" id="browseBtn">
+                            <i class="fas fa-folder-open"></i> Browse Files
+                        </button>
+                    </div>
+
+                    <!-- Image Preview -->
+                    <div class="image-preview" id="imagePreview" style="display: none;">
+                        <div class="preview-header">
+                            <h3>Uploaded Image</h3>
+                            <button class="btn btn-secondary btn-sm" id="clearBtn">
+                                <i class="fas fa-times"></i> Clear
+                            </button>
+                        </div>
+                        <img id="previewImage" src="" alt="Preview">
+                        <div class="image-info" id="imageInfo"></div>
+                    </div>
+                </div>
+
+                <!-- Analyze Button -->
+                <div class="action-section" id="actionSection" style="display: none;">
+                    <button class="btn btn-analyze" id="analyzeBtn">
+                        <i class="fas fa-search"></i> Analyze Image
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading Section -->
+            <section class="loading-section" id="loadingSection" style="display: none;">
+                <div class="loading-card">
+                    <div class="spinner"></div>
+                    <p>Analyzing your image...</p>
+                    <small>This may take a few seconds</small>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-card">
+                    <div class="results-header">
+                        <h2><i class="fas fa-chart-bar"></i> Analysis Results</h2>
+                        <div class="result-badge" id="resultBadge"></div>
+                    </div>
+
+                    <!-- Primary Result -->
+                    <div class="primary-result" id="primaryResult"></div>
+
+                    <!-- Confidence Meter -->
+                    <div class="confidence-section">
+                        <h3>Confidence Level</h3>
+                        <div class="confidence-meter">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                        </div>
+                        <div class="confidence-label" id="confidenceLabel"></div>
+                    </div>
+
+                    <!-- All Predictions -->
+                    <div class="predictions-section">
+                        <h3>All Predictions</h3>
+                        <div class="predictions-list" id="predictionsList"></div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="results-actions">
+                        <button class="btn btn-primary" id="newAnalysisBtn">
+                            <i class="fas fa-plus"></i> New Analysis
+                        </button>
+                        <button class="btn btn-secondary" id="downloadBtn">
+                            <i class="fas fa-download"></i> Download Report
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section class="error-section" id="errorSection" style="display: none;">
+                <div class="error-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error</h3>
+                    <p id="errorMessage"></p>
+                    <button class="btn btn-primary" id="retryBtn">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Brain Tumor Classification System</p>
+                <p class="disclaimer">
+                    <i class="fas fa-info-circle"></i> 
+                    This tool is for research and educational purposes only. 
+                    Always consult medical professionals for diagnosis.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

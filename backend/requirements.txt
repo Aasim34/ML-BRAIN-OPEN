@@ -1,0 +1,22 @@
+# Backend Requirements - Lightweight (uses main project's ML packages)
+
+# Web Framework Only
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# Image Processing (needed for backend)
+Pillow>=10.0.0
+
+# File Upload
+python-multipart==0.0.6
+
+# Configuration
+python-dotenv==1.0.0
+
+# NOTE: TensorFlow, Keras, NumPy, OpenCV, etc.
+# are already installed in the main project and will be used automatically
+tensorboard==2.15.1
+
+# Optional: For better performance
+# gunicorn==21.2.0  # Production server (Linux/Mac)
+# waitress==2.1.2   # Production server (Windows)
