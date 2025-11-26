@@ -45,12 +45,22 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # Load model
 print("Loading model...")
-# Load the specific model file
+
+# Custom object scope to handle batch_shape compatibility
+def custom_input_layer(*args, **kwargs):
+    """Custom InputLayer that handles batch_shape -> input_shape conversion"""
+    if 'batch_shape' in kwargs:
+        batch_shape = kwargs.pop('batch_shape')
+        if batch_shape and len(batch_shape) > 1:
+            kwargs['shape'] = batch_shape[1:]
+    return keras.layers.InputLayer(*args, **kwargs)
+
+# Try loading .h5 model with custom objects
 model_path = MODEL_DIR / "brain_tumor_model.h5"
 if model_path.exists():
     try:
-        # Load model
-        model = keras.models.load_model(model_path, compile=False)
+        with keras.utils.custom_object_scope({'InputLayer': custom_input_layer}):
+            model = keras.models.load_model(model_path, compile=False)
         print(f"✓ Model loaded successfully from {model_path}")
     except Exception as e:
         print(f"⚠️ Error loading model: {e}")
